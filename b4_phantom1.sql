@@ -1,0 +1,19 @@
+--REPEATABLE READ
+--Phantom
+
+USE polyclinic9
+
+GO
+
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
+BEGIN TRAN	
+
+SELECT * FROM treatment
+	WHERE MONTH(starting_date) > '5'
+
+WAITFOR DELAY '00:00:05'
+
+SELECT * FROM treatment
+	WHERE MONTH(starting_date) > '5'
+
+COMMIT TRAN
