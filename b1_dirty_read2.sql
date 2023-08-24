@@ -1,0 +1,13 @@
+--READ COMMITED
+--Dirty read
+
+USE polyclinic9
+
+GO
+
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED
+BEGIN TRAN
+
+SELECT * FROM treatment
+WHERE doctor_id = 5 and patient_id = 1
+COMMIT TRAN
